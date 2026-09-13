@@ -293,6 +293,11 @@ const RoseBouquet = () => {
               <filter id="petalShadow">
                 <feDropShadow dx="1" dy="1.5" stdDeviation="1.5" floodColor="#4a0015" floodOpacity="0.4"/>
               </filter>
+
+              {/* ===== CLIP PATH FOR THE IMAGE ===== */}
+              <clipPath id="imageClip">
+                <circle cx="250" cy="140" r="42" />
+              </clipPath>
             </defs>
 
             {/* ===== STEMS, THORNS & LEAVES ===== */}
@@ -344,7 +349,7 @@ const RoseBouquet = () => {
               <ellipse cx="355" cy="385" rx="20" ry="8" fill="url(#leafGreen2)" transform="rotate(50 355 385)"/>
             </g>
 
-            {/* ===== HUGE PACKED ROSES (Shifted down, squeezed together, and pushed to the ribbon) ===== */}
+            {/* ===== HUGE PACKED ROSES ===== */}
             
             {/* CENTER ROSE */}
             <g className={bloomClass()} style={{ transitionDelay: '200ms' }}>
@@ -371,18 +376,47 @@ const RoseBouquet = () => {
               <RoseBloom cx={350} cy={240} scale={1.2} rotate={10} size="medium" seed={5} />
             </g>
 
-            {/* BOTTOM CENTER ROSES (Resting directly on the ribbon) */}
+            {/* BOTTOM CENTER ROSES */}
             <g className={bloomClass()} style={{ transitionDelay: '1400ms' }}>
               <RoseBloom cx={205} cy={290} scale={1.15} rotate={-8} size="small" seed={6} />
               <RoseBloom cx={295} cy={290} scale={1.15} rotate={8} size="small" seed={7} />
             </g>
 
-            {/* SMALL ACCENT ROSES (Filling the gaps) */}
+
+            {/* ==================================================== */}
+            {/* ============ TOP CENTER FRAMED IMAGE =============== */}
+            {/* ==================================================== */}
+            <g className={bloomClass()} style={{ transitionDelay: '1800ms' }}>
+              {/* Elegant Gold Glow Behind the Image */}
+              <circle cx="250" cy="140" r="46" fill="url(#ribbonGold)" opacity="0.9" filter="url(#glow)"/>
+              
+              {/* Dark inner ring for contrast */}
+              <circle cx="250" cy="140" r="44" fill="#2d1b1b" />
+              
+              {/* THE IMAGE ITSELF */}
+              <image
+                href="https://i.ibb.co/cSnW0gLQ/800448598-1006721439053349-1745937785963211926-n.jpg" /* <--- REPLACE THIS LINK */
+                x="200"
+                y="90"
+                width="100"
+                height="100"
+                clipPath="url(#imageClip)"
+                preserveAspectRatio="xMidYMid slice"
+              />
+
+              {/* Glossy overlay sheen to make it look like a locket/gem */}
+              <circle cx="250" cy="140" r="42" fill="url(#ribbonSheen)" opacity="0.4" pointerEvents="none" />
+              <circle cx="250" cy="140" r="42" stroke="url(#ribbonGold)" strokeWidth="2" fill="none" />
+            </g>
+            {/* ==================================================== */}
+
+
+            {/* SMALL ACCENT ROSES (Filling the gaps around the image) */}
             <g className={bloomClass()} style={{ transitionDelay: '1600ms' }}>
               <RoseBloom cx={135} cy={285} scale={0.9} size="accent" seed={8} />
               <RoseBloom cx={365} cy={285} scale={0.9} size="accent" seed={9} />
-              <RoseBloom cx={220} cy={145} scale={0.8} size="accent" seed={10} />
-              <RoseBloom cx={280} cy={145} scale={0.8} size="accent" seed={11} />
+              <RoseBloom cx={200} cy={110} scale={0.8} size="accent" seed={10} />
+              <RoseBloom cx={300} cy={110} scale={0.8} size="accent" seed={11} />
             </g>
 
             {/* ===== RIBBON / WRAP ===== */}
@@ -403,10 +437,10 @@ const RoseBouquet = () => {
             </g>
 
             {/* ===== SPARKLE EFFECTS ===== */}
-            <g className={`transition-all duration-[1200ms] ease-out ${stage === 'bloomed' ? 'opacity-100' : 'opacity-0'}`} style={{ transitionDelay: '2200ms' }}>
-              <circle cx="250" cy="140" r="2" fill="#fff5f7" opacity="0.8">
+            <g className={`transition-all duration-[1200ms] ease-out ${stage === 'bloomed' ? 'opacity-100' : 'opacity-0'}`} style={{ transitionDelay: '2400ms' }}>
+              <circle cx="250" cy="80" r="2.5" fill="#fff5f7" opacity="0.8">
                 <animate attributeName="opacity" values="0.2;1;0.2" dur="2s" repeatCount="indefinite"/>
-                <animate attributeName="r" values="1;3;1" dur="2s" repeatCount="indefinite"/>
+                <animate attributeName="r" values="1.5;3;1.5" dur="2s" repeatCount="indefinite"/>
               </circle>
               <circle cx="160" cy="170" r="1.5" fill="#fff5f7" opacity="0.7">
                 <animate attributeName="opacity" values="0.2;1;0.2" dur="2.5s" repeatCount="indefinite"/>
